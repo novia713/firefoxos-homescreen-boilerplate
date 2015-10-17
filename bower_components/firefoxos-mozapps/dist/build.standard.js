@@ -1,6 +1,6 @@
-define(["exports"], function (exports) {
-  "use strict";
+"use strict";
 
+(function (exports) {
   // Hidden manifest roles that we do not show
   var HIDDEN_ROLES = ["system", "input", "homescreen", "theme"];
 
@@ -100,7 +100,7 @@ define(["exports"], function (exports) {
       });
 
       var accurateSize = list[0]; // The biggest icon available
-      for (var i = 0; i < length; i++) {
+      for (var i = 0; i < list.length; i++) {
         var iconSize = list[i];
 
         if (iconSize < size) {
@@ -153,7 +153,11 @@ define(["exports"], function (exports) {
     return iconsMap[identifier];
   }
 
-  exports.Icon = Icon;
-  exports.all = all;
-  exports.get = get;
-});
+  // Can't figure out a nice way to have 6to5 export to a global FxOSApps object
+  // as well which is needed for backwards compatibility.
+  exports.FxosApps = {
+    Icon: Icon,
+    all: all,
+    get: get
+  };
+}(window));
